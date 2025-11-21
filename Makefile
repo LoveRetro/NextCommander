@@ -89,7 +89,7 @@ all: $(EXECUTABLE)
 
 $(EXECUTABLE): $(addprefix $(OUTDIR)/,$(OBJS))
 	$(SUM) "  LINK    $@"
-	$(CMD)$(CXX) $(LINKFLAGS) -o $@ $^
+	$(CMD)$(CXX) -o $@ $^ $(LINKFLAGS)
 
 $(OUTDIR)/%.o: src/%.cpp
 	@mkdir -p $(@D)
