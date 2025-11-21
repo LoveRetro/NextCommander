@@ -61,6 +61,7 @@ RESDIR := res
 CXXFLAGS += -DRESDIR="\"$(RESDIR)\""
 
 LINKFLAGS += -s
+LINKFLAGS += -L$(PREFIX)/lib/$(BUILD_ARCH) -L$(PREFIX)/lib
 LINKFLAGS += -l$(SDL) -l$(SDL)_image -l$(SDL)_ttf
 #LINKFLAGS += $(shell $(SDL_CONFIG) --libs) -lSDL_image -lSDL_ttf
 ifeq ($(PLATFORM),miyoomini)
