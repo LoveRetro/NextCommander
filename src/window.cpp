@@ -132,10 +132,12 @@ int CWindow::execute()
                 }
                 case SDL_QUIT: return m_retVal;
 #ifdef USE_SDL2
+#ifndef IGNORE_TEXTINPUT
                 case SDL_TEXTINPUT:
                 case SDL_TEXTEDITING:
                     l_render = textInput(event) || l_render;
                     break;
+#endif
                 case SDL_MOUSEWHEEL:
                     SDL_utils::setMouseCursorEnabled(true);
                     l_render
