@@ -70,6 +70,7 @@ CXXFLAGS += -DCMDR_KEY_SELECT=6		# 8		# SELECT
 CXXFLAGS += -DCMDR_KEY_TRANSFER=7	# 9	# START
 CXXFLAGS += -DCMDR_KEY_MENU=8		# 19		# MENU (added)
 CXXFLAGS += -DIGNORE_KEYDOWN=1      # miyoo inputd doubles up events
+CXXFLAGS += -DIGNORE_TEXTINPUT=1    # miyoo inputd also emits phantom SDL_TEXTINPUT
 
 # Screen
 CXXFLAGS += -DAUTOSCALE=1
