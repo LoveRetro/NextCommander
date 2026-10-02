@@ -62,9 +62,18 @@ int CWindow::execute()
     SDL_Event event;
     bool l_loop(true);
     bool l_render(true);
+    // Re-render the first few frames: on fbdev-style double-buffered targets a
+    // single startup flip can land on a page that the previous app (or the
+    // launcher handing off to us) still overwrites, leaving a stale screen
+    // until the next input-triggered render.
+    int l_warmup(8);
     // Main loop
     while (l_loop)
     {
+        if (l_warmup > 0) {
+            --l_warmup;
+            l_render = true;
+        }
         // Handle key press
         while (SDL_PollEvent(&event))
         {
