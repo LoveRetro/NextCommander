@@ -80,8 +80,17 @@ int Screen::init()
 
     int window_w = screen.actual_w;
     int window_h = screen.actual_h;
+    // When autoscaling, size the window to the display: deriving it from
+    // disp_width * ppu can exceed what the driver supports (e.g. mali-fbdev
+    // fails to create a 3840x2880 surface on a 640x480 panel at high PPU).
+    SDL_DisplayMode dm;
+    if (cfg.disp_autoscale && SDL_GetCurrentDisplayMode(0, &dm) == 0
+        && dm.w > 0 && dm.h > 0) {
+        window_w = dm.w;
+        window_h = dm.h;
+    }
     window = SDL_CreateWindow("Commander", SDL_WINDOWPOS_UNDEFINED,
-        SDL_WINDOWPOS_UNDEFINED, window_h, window_h, window_flags);
+        SDL_WINDOWPOS_UNDEFINED, window_w, window_h, window_flags);
     if (window == nullptr) {
         SDL_Log("Failed to create window: %s", SDL_GetError());
         return 1;
